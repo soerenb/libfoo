@@ -37,7 +37,7 @@ char *foo_gets(void)
 		ch = fgets(buf, BUFSIZE, stdin);
 		if (ch == NULL)
 			return NULL;
-		
+
 		len = 1;
 		while (*ch != '\0') {
 			if (*ch == '\n')

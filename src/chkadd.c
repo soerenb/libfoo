@@ -26,5 +26,6 @@ int foo_chkadd(int a, int b)
 		fputs("int overflow\n", stderr);
 		return INT_MAX;
 	}
-	return (a + b);
+
+	return a + b;
 }

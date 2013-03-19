@@ -26,5 +26,6 @@ unsigned int foo_chkuadd(unsigned int a, unsigned int b)
 		fputs("unsigned int overflow\n", stderr);
 		return UINT_MAX;
 	}
-	return (a + b);
+
+	return a + b;
 }

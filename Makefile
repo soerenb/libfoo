@@ -5,7 +5,7 @@ CFLAGS = -Wall -O3 -march=native -D_FORTIFY_SOURCE=2 -fstack-protector -Iinclude
 LIBNAME = foo
 LIBDIR = lib
 TARGET_LIB = ${LIBDIR}/lib${LIBNAME}.a
-SOURCES = src/gets.c src/chkuadd.c src/chkadd.c src/filesize.c
+SOURCES = src/gets.c src/chkuadd.c src/chkadd.c src/filesize.c src/gopt.c
 OBJECTS = $(addsuffix .o, $(basename ${SOURCES}))
 
 .PHONY: clean distclean

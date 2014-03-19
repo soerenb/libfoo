@@ -16,7 +16,7 @@ debug: CXXFLAGS+=-O0 -g -p -U_FORTIFY_SOURCE
 debug: CFLAGS+=-O0 -g -p -U_FORTIFY_SOURCE
 debug: all
 
-ifdef MAKEVERBOSE
+ifdef V
 quiet =
 Q =
 else

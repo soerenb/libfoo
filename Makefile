@@ -12,8 +12,8 @@ OBJECTS = $(addsuffix .o, $(basename ${SOURCES}))
 
 all: ${TARGET_LIB}
 
-debug: CXXFLAGS+=-O0 -g -p
-debug: CFLAGS+=-O0 -g -p
+debug: CXXFLAGS+=-O0 -g -p -U_FORTIFY_SOURCE
+debug: CFLAGS+=-O0 -g -p -U_FORTIFY_SOURCE
 debug: all
 
 ifdef MAKEVERBOSE

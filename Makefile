@@ -1,6 +1,6 @@
 CC ?= gcc
 AR = gcc-ar
-CFLAGS = -Wall -O3 -march=native -D_FORTIFY_SOURCE=2 -fstack-protector -Iinclude -flto -ffat-lto-objects
+CFLAGS = -Wall -O3 -march=native -D_FORTIFY_SOURCE=2 -fstack-protector-strong -Iinclude -flto -ffat-lto-objects
 
 LIBNAME = foo
 LIBDIR = lib

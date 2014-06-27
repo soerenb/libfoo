@@ -1,6 +1,7 @@
 CC ?= gcc
 AR = gcc-ar
-CFLAGS = -Wall -O3 -march=native -D_FORTIFY_SOURCE=2 -fstack-protector-strong -Iinclude -flto -ffat-lto-objects -fdiagnostics-color=auto
+CFLAGS = -Wall -O3 -march=native -D_FORTIFY_SOURCE=2 -fstack-protector-strong \
+	 -Iinclude -flto -ffat-lto-objects -fdiagnostics-color=auto -MMD -MP
 
 LIBNAME = foo
 LIBDIR = lib
@@ -11,6 +12,8 @@ OBJECTS = $(addsuffix .o, $(basename ${SOURCES}))
 .PHONY: clean distclean
 
 all: ${TARGET_LIB}
+
+-include $(OBJECTS:.o=.d)
 
 debug: CXXFLAGS+=-O0 -g -p -U_FORTIFY_SOURCE
 debug: CFLAGS+=-O0 -g -p -U_FORTIFY_SOURCE
@@ -41,7 +44,7 @@ ${LIBDIR}:
 	${Q}mkdir -p ${LIBDIR}
 
 clean:
-	rm -rf ${TARGET_LIB} ${OBJECTS}
+	rm -rf ${TARGET_LIB} ${OBJECTS} $(OBJECTS:.o=.d)
 
 distclean: clean
 	rm -rf ${LIBDIR}

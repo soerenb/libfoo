@@ -1,7 +1,7 @@
 CC ?= gcc
 AR = gcc-ar
 CFLAGS = -Wall -O3 -march=native -D_FORTIFY_SOURCE=2 -fstack-protector-strong \
-	 -Iinclude -flto -ffat-lto-objects -fdiagnostics-color=auto -MMD -MP
+	 -Iinclude -flto -ffat-lto-objects -fdiagnostics-color=auto
 
 LIBNAME = foo
 LIBDIR = lib
@@ -27,18 +27,18 @@ quiet = quiet_
 Q = @
 endif
 
-cc_c_o = "${CC} -c ${CFLAGS} ${SYMBOLS} -o $@ $<"
-quiet_cc_c_o = "CC $@"
-cc_o_a = "${AR} rcs $@ ${OBJECTS}"
-quiet_cc_o_a = "AR $@"
+cc_c_o = ${CC} -c ${CFLAGS} ${SYMBOLS} -MMD -MP -o $@ $<
+quiet_cc_c_o = CC $@
+ar_o_a = ${AR} rcs $@ $^
+quiet_ar_o_a = AR $@
 
 %.o: %.c
 	@echo "$(${quiet}cc_c_o)"
-	@${CC} -c ${CFLAGS} ${SYMBOLS} -o $@ $<
+	@${call cc_c_o}
 
 ${TARGET_LIB}: ${OBJECTS} | ${LIBDIR}
-	@echo "$(${quiet}cc_o_a)"
-	@${AR} rcs $@ ${OBJECTS}
+	@echo "$(${quiet}ar_o_a)"
+	@${call ar_o_a}
 
 ${LIBDIR}:
 	${Q}mkdir -p ${LIBDIR}

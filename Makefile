@@ -2,7 +2,7 @@ CC ?= gcc
 AR = gcc-ar
 CFLAGS = -Wall -O3 -march=native -D_FORTIFY_SOURCE=2 -fstack-protector-strong \
 	 -Iinclude -flto -ffat-lto-objects -fdiagnostics-color=auto -fpic
-LDFLAGS = -shared
+LDFLAGS = -shared -flto -Wl,-z,relro,-z,now
 
 LIBNAME = foo
 LIBDIR = lib

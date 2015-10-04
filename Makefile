@@ -11,8 +11,6 @@ TARGET_SLIB = ${LIBDIR}/lib${LIBNAME}.so.1
 SOURCES = src/gets.c src/chkuadd.c src/chkadd.c src/filesize.c src/gopt.c
 OBJECTS = $(addsuffix .o, $(basename ${SOURCES}))
 
-.PHONY: clean distclean
-
 all: ${TARGET_LIB} ${TARGET_SLIB}
 
 -include $(OBJECTS:.o=.d)
@@ -51,8 +49,10 @@ ${TARGET_SLIB}: ${OBJECTS} | ${LIBDIR}
 ${LIBDIR}:
 	${Q}mkdir -p ${LIBDIR}
 
+.PHONY: clean
 clean:
 	rm -rf ${TARGET_LIB} ${TARGET_SLIB} ${OBJECTS} $(OBJECTS:.o=.d)
 
+.PHONY: distclean
 distclean: clean
 	rm -rf ${LIBDIR}

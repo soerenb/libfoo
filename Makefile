@@ -8,7 +8,8 @@ LIBNAME = foo
 LIBDIR = lib
 TARGET_LIB = ${LIBDIR}/lib${LIBNAME}.a
 TARGET_SLIB = ${LIBDIR}/lib${LIBNAME}.so.1
-SOURCES = src/gets.c src/chkuadd.c src/chkadd.c src/filesize.c src/gopt.c
+SOURCES = src/gets.c src/chkuadd.c src/chkadd.c src/filesize.c src/gopt.c \
+	  src/stack.c
 OBJECTS = $(addsuffix .o, $(basename ${SOURCES}))
 
 all: ${TARGET_LIB} ${TARGET_SLIB}

@@ -20,6 +20,8 @@ read http://www.purposeful.co.uk/tfl/
 #ifndef GOPT_H_INCLUDED
 #define GOPT_H_INCLUDED
 
+#include <stddef.h>
+
 #define GOPT_ONCE   0
 #define GOPT_REPEAT 1
 #define GOPT_NOARG  0

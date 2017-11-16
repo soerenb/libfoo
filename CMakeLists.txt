@@ -1,9 +1,18 @@
 cmake_minimum_required (VERSION 3.9)
-set (CMAKE_POSITION_INDEPENDENT_CODE on)
-set (CMAKE_INTERPROCEDURAL_OPTIMIZATION on)
 project (foo)
 
+set (CMAKE_POSITION_INDEPENDENT_CODE on)
+set (CMAKE_INTERPROCEDURAL_OPTIMIZATION on)
+if (NOT CMAKE_BUILD_TYPE)
+	set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose the type of build." FORCE)
+endif()
+
 option (BUILD_TESTING "Enable tests")
+
+set (GOL_CFLAGS -Wall -fstack-protector-strong)
+set (GOL_CFLAGS_DEBUG ${GOL_CFLAGS} -O0 -ggdb3)
+set (GOL_CFLAGS_RELEASE ${GOL_CFLAGS} -O2 -D__FORTIFY_SOURCE=2)
+set (GOL_CFLAGS_RELWDBG ${GOL_CFLAGS_RELEASE} -ggdb3)
 
 add_library (foo
 	src/chkadd.c
@@ -15,10 +24,14 @@ add_library (foo
 	src/stack.c
 )
 
-set (CMAKE_C_FLAGS "-O2 -Wall -fstack-protector-strong -D__FORTIFY_SOURCE=2 ${CMAKE_C_FLAGS}")
-
 target_include_directories (foo
 	PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+target_compile_options (foo
+	PRIVATE $<$<CONFIG:Debug>:${GOL_CFLAGS_DEBUG}>
+	PRIVATE $<$<CONFIG:Release>:${GOL_CFLAGS_RELEASE}>
+	PRIVATE $<$<CONFIG:RelWithDebInfo>:${GOL_CFLAGS_RELWDBG}>
 )
 
 install (TARGETS foo DESTINATION lib EXPORT foo)

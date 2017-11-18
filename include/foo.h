@@ -5,6 +5,10 @@
 
 #define ARRAY_SIZE(x)	(sizeof(x) / sizeof((x)[0]))
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 int foo_chkadd(int a, int b);
 unsigned int foo_chkuadd(unsigned int a, unsigned int b);
 char *foo_gets(void);
@@ -23,5 +27,9 @@ void foo_queue_destroy(void *queue);
 int foo_queue_enqueue(void *queue, void *data);
 void *foo_queue_dequeue(void *queue);
 void *foo_queue_peek(void *queue);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

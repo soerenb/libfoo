@@ -51,6 +51,15 @@ if (BUILD_TESTING)
 
 	add_test (NAME test_stack COMMAND test_exec_stack)
 
+	add_executable (test_exec_stack_cpp
+		tests/stack/stack.cpp
+	)
+	target_link_libraries (test_exec_stack_cpp
+		foo
+	)
+
+	add_test (NAME test_stack_cpp COMMAND test_exec_stack_cpp)
+
 	# test queue
 	add_executable (test_exec_queue
 		tests/queue/queue.c
@@ -60,4 +69,13 @@ if (BUILD_TESTING)
 	)
 
 	add_test (NAME test_queue COMMAND test_exec_queue)
+
+	add_executable (test_exec_queue_cpp
+		tests/queue/queue.cpp
+	)
+	target_link_libraries (test_exec_queue_cpp
+		foo
+	)
+
+	add_test (NAME test_queue_cpp COMMAND test_exec_queue_cpp)
 endif ()

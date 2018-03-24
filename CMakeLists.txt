@@ -1,8 +1,13 @@
 cmake_minimum_required (VERSION 3.9)
 project (foo)
 
+include (CheckIPOSupported)
+
 set (CMAKE_POSITION_INDEPENDENT_CODE on)
-set (CMAKE_INTERPROCEDURAL_OPTIMIZATION on)
+check_ipo_supported (RESULT IPO_SUPPORTED)
+if (IPO_SUPPORTED)
+	set (CMAKE_INTERPROCEDURAL_OPTIMIZATION on)
+endif()
 if (NOT CMAKE_BUILD_TYPE)
 	set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose the type of build." FORCE)
 endif()
